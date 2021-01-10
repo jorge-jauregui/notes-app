@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'notes-app';
+  storedNotes = [];
+
+  onNoteAdded(note){
+    this.storedNotes.push(note);
+  }
 }

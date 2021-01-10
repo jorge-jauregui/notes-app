@@ -1,0 +1,8 @@
+<div *ngIf="notes.length > 0" class="notes-container">
+  <div class="notes" *ngFor="let note of notes">
+    <h1>{{note.title}}</h1>
+    <p>{{note.description}}</p>
+    <hr>
+  </div>
+</div>
+<p *ngIf="notes.length === 0">No notes exist yet!</p>
