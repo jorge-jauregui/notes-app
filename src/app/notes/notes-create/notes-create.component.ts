@@ -1,4 +1,7 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms'
+
+import { NotesService } from '../notes.service';
 
 @Component({
   selector: 'app-notes-create',
@@ -7,22 +10,23 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 })
 export class NotesCreateComponent implements OnInit {
 
-  @Output() noteCreated = new EventEmitter();
-
   enteredTitle = '';
   enteredDescription = '';
 
-  constructor() { }
+  constructor(public notesService: NotesService) { }
 
   ngOnInit(): void {
   }
 
-  onAddNote() {
-    const note = {
-      title: this.enteredTitle,
-      description: this.enteredDescription
+  onAddNote(form: NgForm) {
+    if(form.invalid){
+      return;
+    };
+    const note: Note = {
+      title: form.value.title,
+      description: form.value.description
     }
-    this.noteCreated.emit(note);
-  }
+    this.notesService.addNote(form.value.title, form.value.description);
+  };
 
 }

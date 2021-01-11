@@ -1,6 +1,18 @@
-<h1>Notes App</h1>
-<textarea rows="10" [(ngModel)]="enteredTitle"></textarea>
-<textarea rows="10" [(ngModel)]="enteredDescription"></textarea>
 
-<hr>
-<button (click)="onAddNote()">Save Note</button>
+<form (submit)="onAddNote(noteForm)" #noteForm="ngForm">
+  <textarea
+    rows="10"
+    name="title"
+    ngModel
+    required
+    #title="ngModel">
+  </textarea>
+  <p *ngIf="title.invalid">Add a title to your note!</p>
+  <textarea
+    rows="10"
+    name="description"
+    ngModel>
+  </textarea>
+  <button type="submit">Save Note</button>
+</form>
+
