@@ -11,6 +11,7 @@ import { HeaderComponent } from './header/header.component';
 import { NoteListComponent } from './notes/note-list/note-list/note-list.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { NotesComponent } from './notes/notes/notes.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     NotesCreateComponent,
     HeaderComponent,
     NoteListComponent,
+    NotesComponent,
   ],
   imports: [
     BrowserModule,

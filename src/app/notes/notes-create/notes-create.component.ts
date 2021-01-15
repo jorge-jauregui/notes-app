@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms'
 
 import { NotesService } from '../notes.service';
 
+import { Note } from '../note.model';
+
 @Component({
   selector: 'app-notes-create',
   templateUrl: './notes-create.component.html',
@@ -26,7 +28,8 @@ export class NotesCreateComponent implements OnInit {
       title: form.value.title,
       description: form.value.description
     }
-    this.notesService.addNote(form.value.title, form.value.description);
+    this.notesService.addNote(note.title, note.description);
+    form.resetForm();
   };
 
 }

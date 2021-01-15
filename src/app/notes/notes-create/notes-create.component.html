@@ -5,13 +5,15 @@
     name="title"
     ngModel
     required
-    #title="ngModel">
+    #title="ngModel"
+    placeholder="Note title">
   </textarea>
   <p *ngIf="title.invalid">Add a title to your note!</p>
   <textarea
     rows="10"
     name="description"
-    ngModel>
+    ngModel
+    placeholder="Note title">
   </textarea>
   <button type="submit">Save Note</button>
 </form>
