@@ -12,6 +12,7 @@ import { NoteListComponent } from './notes/note-list/note-list/note-list.compone
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NotesComponent } from './notes/notes/notes.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NotesComponent } from './notes/notes/notes.component';
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

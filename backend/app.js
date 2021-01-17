@@ -1,9 +1,29 @@
 const express = require('express');
-const { stringify } = require('querystring');
+const bodyParser = require('body-parser');
+
 const app = express();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 
-app.use('/notes', (req, res, next) => {
+// Incoming requests may have these headers and we allow them
+app.use('/', (req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
+  next();
+});
+
+
+app.post('/notes', (req, res, next) => {
+  const note = req.body;
+  console.log(note);
+  res.status(201).json({
+    message: 'Note created succesfully'
+  })
+});
+
+app.get('/notes', (req, res, next) => {
   const notes = [
     {
       id: '11223',
@@ -18,7 +38,7 @@ app.use('/notes', (req, res, next) => {
   ]
   // Returning data in json format
   res.status(200).json({
-    message: 'Posts fetched successfully',
+    message: 'Notes fetched successfully',
     notes: notes
   });
 });

@@ -16,10 +16,10 @@ export class NoteListComponent implements OnInit, OnDestroy {
   constructor(public notesService: NotesService) { }
 
   ngOnInit(): void {
-    this.notes = this.notesService.getNotes();
+    this.notesService.getNotes();
     this.notesSubscription = this.notesService.getNoteUpdateListener()
-      .subscribe((data: Note[]) => {
-        this.notes = data;
+      .subscribe((notes: Note[]) => {
+        this.notes = notes;
       });
   }
 
