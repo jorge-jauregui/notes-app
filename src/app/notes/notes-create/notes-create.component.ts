@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms'
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { NotesService } from '../notes.service';
-
 import { Note } from '../note.model';
 
 @Component({
@@ -14,22 +14,43 @@ export class NotesCreateComponent implements OnInit {
 
   enteredTitle = '';
   enteredDescription = '';
+  public note: Note;
+  private mode = 'create';
+  private noteId: string;
 
-  constructor(public notesService: NotesService) { }
+  constructor(public notesService: NotesService,
+              public route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    // Here we listen to changes in the url and change the data depending on the params
+    this.route.firstChild.paramMap.subscribe((paramMap: ParamMap) => {
+      if(paramMap.has('noteId')) {
+        this.mode = 'edit';
+        this.noteId = paramMap.get('noteId');
+        this.notesService.getNote(this.noteId).subscribe((noteData) => {
+          this.note = {
+            id: noteData._id,
+            title: noteData.title,
+            description: noteData.description
+          }
+        });
+      } else {
+        this.mode = 'create';
+        this.noteId = null;
+      }
+    });
   }
 
-  onAddNote(form: NgForm) {
+  onSaveNote(form: NgForm) {
     if(form.invalid){
       return;
     };
-    const note: Note = {
-      title: form.value.title,
-      description: form.value.description
+    if(this.mode === 'create') {
+      this.notesService.addNote(form.value.title, form.value.description);
+    } else {
+      this.notesService.updateNote(this.noteId, form.value.title, form.value.description);
     }
-    this.notesService.addNote(note.title, note.description);
-    form.resetForm();
+    // form.resetForm();
   };
 
 }

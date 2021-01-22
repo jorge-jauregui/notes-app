@@ -1,20 +1,21 @@
 
-<form (submit)="onAddNote(noteForm)" #noteForm="ngForm">
+<form (submit)="onSaveNote(noteForm)" #noteForm="ngForm">
   <textarea
-    rows="10"
+    class="title"
+    rows="2"
     name="title"
-    ngModel
+    [ngModel]="note?.title"
     required
     #title="ngModel"
-    placeholder="Note title">
+    placeholder="Title">
   </textarea>
-  <p *ngIf="title.invalid">Add a title to your note!</p>
   <textarea
-    rows="10"
+    class="description"
+    rows="15"
     name="description"
-    ngModel
-    placeholder="Note title">
+    [ngModel]="note?.description"
+    placeholder="Description">
   </textarea>
-  <button type="submit">Save Note</button>
+  <button class="save" type="submit">Save Note</button>
 </form>
 
