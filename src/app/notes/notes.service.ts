@@ -64,7 +64,7 @@ export class NotesService {
   }
 
   deleteNote(noteId: string) {
-    this.http.delete(patch)
+    this.http.delete('http://localhost:3000/notes/' + noteId)
       .subscribe(() => {
         // Remove deleted note from client with filter() and send back a copy of updated notes
         const updatedNotes = this.notes.filter(note => note.id !== noteId);

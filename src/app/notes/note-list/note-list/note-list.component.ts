@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 export class NoteListComponent implements OnInit, OnDestroy {
   notes: Note[] = [];
   private notesSubscription: Subscription;
+  mode
 
   constructor(public notesService: NotesService) { }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms'
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { NotesService } from '../notes.service';
 import { Note } from '../note.model';
@@ -19,10 +19,15 @@ export class NotesCreateComponent implements OnInit {
   private noteId: string;
 
   constructor(public notesService: NotesService,
-              public route: ActivatedRoute) { }
+              public route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
-    // Here we listen to changes in the url and change the data depending on the params
+    // Here we listen to changes in the url and change the form data depending on the params
+    this.monitorRoute();
+  }
+
+  monitorRoute(){
     this.route.firstChild.paramMap.subscribe((paramMap: ParamMap) => {
       if(paramMap.has('noteId')) {
         this.mode = 'edit';
@@ -52,5 +57,13 @@ export class NotesCreateComponent implements OnInit {
     }
     // form.resetForm();
   };
+
+
+
+  onNewNote(form: NgForm) {
+    this.router.navigate(['create']);
+    this.mode = 'create';
+    form.resetForm();
+  }
 
 }
